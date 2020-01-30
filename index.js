@@ -69,7 +69,7 @@ function Person(name, age) {
     - STRETCH: A car which runs out of `fuel` while driving can't drive any more distance:
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
-
+/**
 function Car(model, milesPerGallon) {
     this.model = model;
     this.milesPerGallon = milesPerGallon;
@@ -88,7 +88,33 @@ function Car(model, milesPerGallon) {
         this.odometer += distance;
         this.tank -= distance / this.milesPerGallon;
     }
+}**/
+function Car(model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
 }
+
+Car.prototype.fill = function(gallons) {
+    this.tank += gallons;
+}
+
+Car.prototype.drive = function(distance) {
+    //STRETCH BEGIN
+    let total = 0;
+    for (let i = 0; i < distance; i++) {
+        total++;
+        if (this.tank - total / this.milesPerGallon === 0) {
+            this.odometer += total;
+            this.tank -= total / this.milesPerGallon;
+            return `I ran out of fuel at ${this.odometer} miles!`;
+        }
+    }
+    //STRETCH END
+    this.odometer += distance;
+    this.tank -= distance / this.milesPerGallon
+};
 /*
   TASK 3
     - Write a Baby constructor subclassing Person.
@@ -110,10 +136,10 @@ function Baby(name, age, favoriteToy) {
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. It can be used by itself to refer to the global object --- Window/global binding
+  2. It can be used followed by an object to refer to it - Implicit binding
+  3. Using a constructor it refers to THAT specific instance - new binding
+  4. It is call explicitily when using .call - Explicit binding     
 */
 
 
